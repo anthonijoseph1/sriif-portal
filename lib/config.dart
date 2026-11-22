@@ -13,7 +13,7 @@ class Brand {
       'Where bold ideas become'; // first line of hero headline (admin can edit it in the portal)
   static const subTagline =
       'Workspace, mentors, funding access and a community of founders – all on one place.';
-  static const since = 'Since 2018'; // badge on the About image
+  static const since = 'Since 2022'; // badge on the About image
 
   // ── LOGO ── asset path ('assets/logo.png') OR web link. '' = text logo.
   static const logo = 'assets/logo.png';
@@ -48,7 +48,8 @@ class Brand {
 // 2. SITE TEXT & BUTTONS  –  every label on the home page
 // ═════════════════════════════════════════════════════════════
 class Site {
-  static const heroEyebrow = 'STARTUP INCUBATOR';
+  static const heroEyebrow =
+      'STARTUP INCUBATOR v1.0'; // small text above the headline
   // words that type out after the headline
   static const heroWords = [
     'scalable businesses',
