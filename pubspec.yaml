@@ -62,6 +62,7 @@ flutter:
   assets:
     - assets/logo.png
     - assets/home.mp4
+    - assets/herohome.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
