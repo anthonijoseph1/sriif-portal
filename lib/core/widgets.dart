@@ -342,10 +342,11 @@ Future<Map<String, String>?> formDialog(
         ),
         FilledButton(
           onPressed: () {
-            if (key.currentState!.validate())
+            if (key.currentState!.validate()) {
               Navigator.pop(ctx, {
                 for (final e in cs.entries) e.key: e.value.text.trim(),
               });
+            }
           },
           child: const Text('Save'),
         ),

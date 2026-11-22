@@ -21,8 +21,9 @@ class _BillingPageState extends State<BillingPage> {
     );
     if (r == null) return;
     final q = int.tryParse(r['Change (+ add / – remove)']!);
-    if (q == null || q == 0)
+    if (q == null || q == 0) {
       return toast(context, 'Enter a number like 2 or -1');
+    }
     final t = r['Seat type']!;
     store.approvals.add(
       Approval(
@@ -179,11 +180,12 @@ class _BillingPageState extends State<BillingPage> {
 
   void settle(Invoice inv, String outcome, String method) {
     if (!mounted) return;
-    if (inv.status == 'Paid')
+    if (inv.status == 'Paid') {
       return toast(
         context,
         'Duplicate payment blocked – invoice already paid.',
       );
+    }
     if (outcome == 'Success') {
       inv.status = 'Paid';
       inv.pending = false;

@@ -408,7 +408,7 @@ class Content {
       'Incubation',
       '6 months',
       'A seat, mentoring, compliance help and investor access while you build and launch.',
-      img: sample('prog2', 1000, 600),
+      img: "assets/incubation.jpg",
       icon: 'rocket',
       stage: 'Prototype to revenue',
       bullets:
@@ -419,11 +419,10 @@ class Content {
       'Acceleration',
       '12 months',
       'Scale-up support for startups with early revenue and a repeatable product.',
-      img: sample('prog3', 1000, 600),
+      img: "assets/accelaration.jpg",
       icon: 'chart',
       stage: 'Revenue stage',
-      bullets:
-          'Corporate pilot introductions|Fundraising prep|Hiring support|Go-to-market mentors',
+      bullets: 'Fundraising prep| Scaling support |Go-to-market mentors',
       cta: 'Apply for Acceleration',
     ),
   ];
@@ -432,63 +431,52 @@ class Content {
   static final journey = [
     item(
       'Apply',
-      'Week 1',
+      'Step 1',
       'Send your idea through the online form.',
       icon: 'edit',
     ),
-    item('Screen', 'Week 2', 'Our team reviews and meets you.', icon: 'check'),
-    item('Pitch', 'Week 3', 'Present to the selection panel.', icon: 'mic'),
+    item('Screen', 'step 2', 'Our team reviews and meets you.', icon: 'check'),
+    item('Pitch', 'step 3', 'Present to the selection panel.', icon: 'mic'),
     item(
       'Onboard',
-      'Week 4',
+      'step 4',
       'Sign the agreement and register on the portal.',
       icon: 'doc',
     ),
-    item(
-      'Build',
-      'Months 1–24',
-      'Use seats, labs, mentors and grants.',
-      icon: 'rocket',
-    ),
-    item(
-      'Graduate',
-      'Month 24',
-      'Move on as an alumnus of SRIIF.',
-      icon: 'trophy',
-    ),
+    item('Build', 'incubate', 'Use seats, labs, mentors', icon: 'rocket'),
   ];
 
   // ── Facilities (first one is shown large) ──
   static final facilities = [
     item(
       'Co-working Space',
-      '120 seats',
-      'Desks, cabins and cubicles with 24x7 access.',
-      img: sample('fac1', 1000, 1000),
-    ),
-    item(
-      'Prototyping Lab',
-      'Hardware',
-      '3D printers, electronics bench and testing tools.',
-      img: sample('fac2'),
-    ),
-    item(
-      'Meeting Rooms',
-      '6 rooms',
-      'Bookable rooms with video-conferencing.',
-      img: sample('fac3'),
+      '30 seats',
+      'Desks, cabins and cubicles with internet access.',
+      img: "assets/cowork1.jpg",
     ),
     item(
       'Instrument Facility',
-      'Pay per use',
-      'Shared analytical instruments billed by usage.',
-      img: sample('fac4'),
+      'wet lab',
+      'RT PCR, -80 c freezers and tools.',
+      img: "assets/lab.jpg",
     ),
     item(
-      'Event Hall',
-      '150 people',
-      'For demo days, workshops and meetups.',
-      img: sample('fac5'),
+      'board Room',
+      '30 people',
+      'Bookable rooms with video-conferencing.',
+      img: "assets/cowork.jpg",
+    ),
+    item(
+      'Hospital access',
+      'request access',
+      'Shared analytical instruments billed by usage.',
+      img: "assets/hospital.jpg",
+    ),
+    item(
+      'clinical',
+      'testing people',
+      'for testing and trials',
+      img: "assets/clinical.jpg",
     ),
   ];
 
@@ -506,64 +494,13 @@ class Content {
     item('AgriTech Forum', 'Industry', ''),
   ];
 
-  // ── Ecosystem: who can join (tabs) ──
-  static final audiences = [
-    item(
-      'Startups',
-      '',
-      'Build your venture with space, mentors, grants and a peer community around you.',
-      icon: 'rocket',
-      img: sample('eco1', 900, 700),
-      bullets:
-          'Incubation seats and labs|Mentors and workshops|Grant and investor access',
-      cta: 'Apply now',
-    ),
-    item(
-      'Corporates',
-      '',
-      'Pilot with early-stage startups, run challenges and source new technology.',
-      icon: 'corporate',
-      img: sample('eco2', 900, 700),
-      bullets: 'Innovation challenges|Pilot programs|Co-creation with startups',
-      cta: 'Partner with us',
-    ),
-    item(
-      'Investors',
-      '',
-      'See curated, screened deal flow and meet founders at our Demo Days.',
-      icon: 'invest',
-      img: sample('eco3', 900, 700),
-      bullets: 'Quarterly demo days|Screened pipeline|Founder office hours',
-      cta: 'Meet our startups',
-    ),
-    item(
-      'Government',
-      '',
-      'Work with us to run schemes, policy pilots and skilling for founders.',
-      icon: 'gov',
-      img: sample('eco4', 900, 700),
-      bullets: 'Scheme implementation|Policy feedback loop|Regional outreach',
-      cta: 'Collaborate',
-    ),
-    item(
-      'Academia',
-      '',
-      'Connect research labs, students and faculty to the startup world.',
-      icon: 'school',
-      img: sample('eco5', 900, 700),
-      bullets:
-          'Research commercialisation|Student internships|Faculty entrepreneurship',
-      cta: 'Join the network',
-    ),
-  ];
-
   // ── Team (link = LinkedIn) ──
   static final team = [
     item(
-      'Dr. A. Kumar',
-      'CEO',
-      'Leads incubation strategy and partnerships.',
-      img: sample('team1', 600, 800),
+      'Dr. Vidya Ramkumar',
+      'Faculty Incharge',
+      'Leads incubation center',
+      img: "assets/vidya.jpg",
       link: 'https://linkedin.com',
     ),
     item(
