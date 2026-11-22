@@ -22,21 +22,28 @@ class SriifApp extends StatelessWidget {
   const SriifApp({super.key});
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: '${Brand.name} Incubation Portal',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Brand.primary, primary: Brand.primary, secondary: Brand.accent),
-          scaffoldBackgroundColor: const Color(0xFFF7F9FC),
-          inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder(), isDense: true),
-        ),
-        initialRoute: '/',
-        onGenerateRoute: (s) => PageRouteBuilder(
-          settings: s,
-          transitionDuration: Duration.zero,
-          pageBuilder: (_, __, ___) => resolve(s.name ?? '/'),
-        ),
-      );
+    title: '${Brand.name} Incubation Portal',
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: Brand.primary,
+        primary: Brand.primary,
+        secondary: Brand.accent,
+      ),
+      scaffoldBackgroundColor: const Color(0xFFF7F9FC),
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(),
+        isDense: true,
+      ),
+    ),
+    initialRoute: '/',
+    onGenerateRoute: (s) => PageRouteBuilder(
+      settings: s,
+      transitionDuration: Duration.zero,
+      pageBuilder: (_, __, ___) => resolve(s.name ?? '/'),
+    ),
+  );
 }
 
 // ═════════════════════════════════════════════════════════════
@@ -76,8 +83,10 @@ Widget resolve(String path) {
     return (portalRoutes[path] ?? portalRoutes['/portal/profile']!)();
   }
   if (path.startsWith('/admin')) {
-    if (store.role != 'admin' && store.role != 'mentor') return const AuthPage();
-    if (store.role == 'mentor' && !mentorPages.contains(path)) return adminRoutes['/admin/dashboard']!();
+    if (store.role != 'admin' && store.role != 'mentor')
+      return const AuthPage();
+    if (store.role == 'mentor' && !mentorPages.contains(path))
+      return adminRoutes['/admin/dashboard']!();
     return (adminRoutes[path] ?? adminRoutes['/admin/dashboard']!)();
   }
   final page = publicRoutes[path];

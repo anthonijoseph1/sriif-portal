@@ -1569,7 +1569,7 @@ Widget _partners(Color bg) {
 int sel = 0;
 
 // ═════════════════════════════════════════════════════════════
-// TEAM  – portrait cards, hover to read more
+// TEAM  – portrait cards, hover to read more other changees
 // ═════════════════════════════════════════════════════════════
 Widget _team(BuildContext c, Color bg) {
   final narrow = MediaQuery.of(c).size.width < 640;
