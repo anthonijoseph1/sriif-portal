@@ -12,7 +12,7 @@ class Brand {
   static const tagline =
       'Where bold ideas become'; // first line of hero headline (admin can edit it in the portal)
   static const subTagline =
-      'Workspace, mentors, funding access and a community of founders – all on one campus.';
+      'Workspace, mentors, funding access and a community of founders – all on one place.';
   static const since = 'Since 2018'; // badge on the About image
 
   // ── LOGO ── asset path ('assets/logo.png') OR web link. '' = text logo.
@@ -34,10 +34,10 @@ class Brand {
   static const surface = Color(0xFFF4F7FB);
 
   // ── CONTACT ──
-  static const email = 'incubation@sriif.in';
-  static const phone = '+91 44 0000 0000';
+  static const email = 'events.sriic@gmail.com';
+  static const phone = '+91 9344841820';
   static const address =
-      'SRIIF, Sri Ramachandra Institute of Higher Education and Research, Porur, Chennai – 600116';
+      'SRIIF, Dental Basement, Sri Ramachandra Institute of Higher Education and Research, Porur, Chennai – 600116';
 
   static const gstRate = 0.18;
   static const demoOtp = '123456';
@@ -48,7 +48,7 @@ class Brand {
 // 2. SITE TEXT & BUTTONS  –  every label on the home page
 // ═════════════════════════════════════════════════════════════
 class Site {
-  static const heroEyebrow = 'UNIVERSITY STARTUP INCUBATOR · CHENNAI';
+  static const heroEyebrow = 'STARTUP INCUBATOR';
   // words that type out after the headline
   static const heroWords = [
     'scalable businesses',
@@ -61,7 +61,7 @@ class Site {
   static const btnExplore = 'Explore';
   // floating glass cards on the hero: [icon, title, subtitle]  (icon names: see iconOf below)
   static const heroCards = [
-    ['rocket', 'Next cohort: Jan 2027', 'Applications close 15 Dec'],
+    ['rocket', 'Next cohort: Jan 2027', 'Applications close 10 Dec'],
     ['mentor', '100+ mentors', 'Book a 1:1 session'],
     ['money', 'Grants & angel access', 'Pitch at every Demo Day'],
   ];
@@ -78,7 +78,7 @@ class Site {
 
   static const ctaTitle = 'Ready to turn your idea into a company?';
   static const ctaSub =
-      'Applications for the next cohort are open. Tell us about your idea – our team replies within a week.';
+      'Applications for the next cohort are open. Tell us about your idea – our team replies within a day.';
   static const ctaButton = 'Start your application';
   static const ctaButton2 = 'Talk to us';
 
@@ -297,10 +297,10 @@ class Content {
 
   // ── Hero numbers strip (animated) ──
   static const stats = [
-    Stat('', 50, '+', 'Startups incubated'),
-    Stat('₹', 25, ' Cr', 'Funding raised'),
+    Stat('', 10, '+', 'Startups incubated'),
+    Stat('₹', 15, ' Cr', 'Funding raised'),
     Stat('', 100, '+', 'Mentors & experts'),
-    Stat('', 25000, '', 'Sq. ft. facilities'),
+    Stat('', 10000, '', 'Sq. ft. facilities'),
   ];
 
   // ── About ──
@@ -332,7 +332,7 @@ class Content {
     item(
       'Money',
       '',
-      'Seed grants, angel introductions and investor demo days.',
+      'Seed grants, angel introductions and investor connects.',
       icon: 'money',
     ),
     item(
@@ -363,10 +363,10 @@ class Content {
 
   // ── Impact numbers (dark band) ──
   static const impact = [
-    Stat('', 50, '+', 'Startups incubated', icon: 'rocket', note: 'Since 2018'),
+    Stat('', 10, '+', 'Startups incubated', icon: 'rocket', note: 'Since 2018'),
     Stat(
       '₹',
-      25,
+      15,
       ' Cr',
       'Funding raised',
       icon: 'money',
@@ -384,7 +384,7 @@ class Content {
     Stat('', 12, '', 'Patents filed', icon: 'doc', note: 'By incubated teams'),
     Stat(
       '',
-      25000,
+      10000,
       '',
       'Sq. ft. of facilities',
       icon: 'space',
@@ -396,18 +396,17 @@ class Content {
   static final programs = [
     item(
       'Pre-Incubation',
-      '6 months',
+      '3 months',
       'Validate your idea with mentors and a small seed grant before you build.',
-      img: sample('prog1', 1000, 600),
+      img: "assets/preincubation.jpg",
       icon: 'idea',
       stage: 'Idea stage',
-      bullets:
-          'Idea validation workshops|Seed grant support|Free co-working hours|Mentor matching',
+      bullets: 'Idea validation workshops|Seed grant support|Mentor matching',
       cta: 'Apply for Pre-Incubation',
     ),
     item(
       'Incubation',
-      '24 months',
+      '6 months',
       'A seat, mentoring, compliance help and investor access while you build and launch.',
       img: sample('prog2', 1000, 600),
       icon: 'rocket',
@@ -426,17 +425,6 @@ class Content {
       bullets:
           'Corporate pilot introductions|Fundraising prep|Hiring support|Go-to-market mentors',
       cta: 'Apply for Acceleration',
-    ),
-    item(
-      'Women Founders',
-      '12 months',
-      'A dedicated track with mentors, peer circles and funding access for women-led startups.',
-      img: sample('prog4', 1000, 600),
-      icon: 'people',
-      stage: 'Any stage',
-      bullets:
-          'Peer founder circles|Mentors who have been there|Grant & investor access',
-      cta: 'Apply to Women Founders',
     ),
   ];
 

@@ -47,12 +47,13 @@ class _HomePageState extends State<HomePage> {
       return;
     }
     final ctx = keys[id]?.currentContext;
-    if (ctx != null)
+    if (ctx != null) {
       Scrollable.ensureVisible(
         ctx,
         duration: const Duration(milliseconds: 800),
         curve: Curves.easeInOutCubic,
       );
+    }
   }
 
   @override
@@ -994,12 +995,13 @@ class _ProgramsSectionState extends State<ProgramsSection> {
 
   Widget _tab(int i, Map<String, String> m, bool wide) {
     final on = i == sel;
-    if (!wide)
+    if (!wide) {
       return ChoiceChip(
         label: Text(m['title'] ?? ''),
         selected: on,
         onSelected: (_) => setState(() => sel = i),
       );
+    }
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: InkWell(
@@ -2047,7 +2049,7 @@ class _StartupsGridState extends State<StartupsGrid> {
     for (final u in store.users.where(
       (u) => u.role == 'incubatee' && u.status == 'active',
     )) {
-      if (!all.any((s) => s['title'] == u.startup))
+      if (!all.any((s) => s['title'] == u.startup)) {
         all.add(
           item(
             u.startup,
@@ -2057,6 +2059,7 @@ class _StartupsGridState extends State<StartupsGrid> {
             stage: 'Onboarded',
           ),
         );
+      }
     }
     final sectors = [
       'All',
