@@ -579,8 +579,6 @@ Widget buildSection(String id, BuildContext c, Color bg) {
       return SectionShell(id: id, bg: bg, child: const StoriesSection());
     case 'events':
       return _events(c, bg);
-    case 'resources':
-      return _resources(c, bg);
     case 'gallery':
       return _gallery(bg);
     case 'faq':
@@ -2468,92 +2466,6 @@ Widget _events(BuildContext c, Color bg) {
         : Column(children: [events, const SizedBox(height: 32), news]),
   );
 }
-
-// ═════════════════════════════════════════════════════════════
-// RESOURCES  – list rows
-// ═════════════════════════════════════════════════════════════
-Widget _resources(BuildContext c, Color bg) => SectionShell(
-  id: 'resources',
-  bg: bg,
-  child: Wrap(
-    spacing: 40,
-    children: [
-      for (final m in Content.resources)
-        Reveal(
-          child: SizedBox(
-            width: colW(c, 2, gap: 40),
-            child: Hoverable(
-              builder: (h) => InkWell(
-                onTap: () => openLink(c, m['link'] ?? ''),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 22,
-                    horizontal: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: h
-                        ? Brand.primary.withOpacity(.04)
-                        : Colors.transparent,
-                    border: const Border(
-                      bottom: BorderSide(color: Colors.black12),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 28,
-                        backgroundColor: h
-                            ? Brand.accent
-                            : Brand.primary.withOpacity(.08),
-                        child: Icon(
-                          iconOf(m['icon'] ?? ''),
-                          color: h ? Colors.black87 : Brand.primary,
-                        ),
-                      ),
-                      const SizedBox(width: 18),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              (m['tag'] ?? '').toUpperCase(),
-                              style: const TextStyle(
-                                color: Brand.primary,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 11,
-                                letterSpacing: 1.5,
-                              ),
-                            ),
-                            Text(
-                              m['title'] ?? '',
-                              style: const TextStyle(
-                                fontSize: 19,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            Text(
-                              m['desc'] ?? '',
-                              style: const TextStyle(color: Colors.black54),
-                            ),
-                          ],
-                        ),
-                      ),
-                      AnimatedSlide(
-                        offset: h ? const Offset(.3, 0) : Offset.zero,
-                        duration: const Duration(milliseconds: 200),
-                        child: const Icon(Icons.arrow_forward_rounded),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-    ],
-  ),
-);
 
 // ═════════════════════════════════════════════════════════════
 // GALLERY  – scrolling photo strip

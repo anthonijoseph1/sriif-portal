@@ -475,7 +475,7 @@ class Content {
     ),
     item(
       'clinical',
-      'testing people',
+      'testing lab',
       'for testing and trials',
       img: "assets/clinical.jpg",
     ),
@@ -726,38 +726,6 @@ class Content {
       'tag': 'Oct 2026',
       'desc': 'SRIIF joins hands with Startup TN.',
     },
-  ];
-
-  // ── Resources (tag = type, link = URL) ──
-  static final resources = [
-    item(
-      'Founder Talks',
-      'Podcast',
-      'Weekly conversations with founders and investors.',
-      icon: 'mic',
-      link: '#',
-    ),
-    item(
-      'Startup Playbooks',
-      'Guides',
-      'Step-by-step guides on GST, DPIIT, hiring and fundraising.',
-      icon: 'book',
-      link: '#',
-    ),
-    item(
-      'Case Studies',
-      'Stories',
-      'How incubated startups solved real problems.',
-      icon: 'doc',
-      link: '#',
-    ),
-    item(
-      'Perks & Credits',
-      'Startup kit',
-      'Cloud, legal and design perks for incubated startups.',
-      icon: 'gift',
-      link: '#',
-    ),
   ];
 
   // ── Gallery photos (any image link or asset) ──
