@@ -305,8 +305,8 @@ class Content {
   ];
 
   // ── About ──
-  static final aboutImage = sample('sriif-about', 1000, 800);
-  static final aboutImage2 = sample('sriif-about2', 600, 500);
+  static final aboutImage = "assets/sriif1.png";
+  static final aboutImage2 = "assets/sriif2.png";
   static const aboutIntro =
       'SRIIF is the startup incubation centre of the university. We help students, faculty, alumni and outside founders turn ideas into sustainable ventures through space, mentoring, funding access and a strong peer community.';
   static const vision =
@@ -505,9 +505,9 @@ class Content {
       link: 'https://linkedin.com',
     ),
     item(
-      'Ms. R. Lakshmi',
-      'Program Manager',
-      'Runs cohorts, billing and onboarding.',
+      'Mr Ganesh Saravanan',
+      'Manager',
+      'Manage Incubation Center.',
       img: sample('team2', 600, 800),
       link: 'https://linkedin.com',
     ),
@@ -519,7 +519,7 @@ class Content {
       link: 'https://linkedin.com',
     ),
     item(
-      'Ms. P. Nair',
+      'Ms. P. harish',
       'Community Lead',
       'Events, founder meetups and outreach.',
       img: sample('team4', 600, 800),
@@ -530,7 +530,7 @@ class Content {
   // ── Mentors (tag = main expertise, role = affiliation, bullets = skill tags) ──
   static final mentors = [
     item(
-      'Dr. Kumar',
+      'Dr K pugalendhi',
       'Product & Strategy',
       'Twenty years building products; helps founders find product-market fit and avoid costly pivots.',
       img: sample('men1', 700, 900),
@@ -591,9 +591,9 @@ class Content {
       link: 'https://example.com',
     ),
     item(
-      'MediSense Labs',
-      'HealthTech',
-      'Low-cost diagnostic device in clinical trials.',
+      'Bails Sports',
+      'SportsTech',
+      'market place for players and coaches.',
       year: '2024',
       stage: 'Seed funded',
       img: sample('st2', 200, 200),

@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../config.dart';
 
@@ -16,6 +17,32 @@ class V {
       (v == null || v.isEmpty || _pan.hasMatch(v)) ? null : 'Invalid PAN (e.g. ABCDE1234F)';
   static String? gstin(String? v) =>
       (v == null || v.isEmpty || _gst.hasMatch(v)) ? null : 'Invalid GSTIN (e.g. 33ABCDE1234F1Z5)';
+  static String? upi(String? v) {
+    final value = (v ?? '').trim();
+    if (value.isEmpty) return 'Enter UPI ID';
+    return RegExp(r'^[\w.-]+@[\w.-]+$').hasMatch(value)
+        ? null
+        : 'Enter a valid UPI ID';
+  }
+}
+
+// Existing dropdown values used by the portal forms.
+class Opts {
+  static const banks = [
+    'State Bank of India',
+    'HDFC Bank',
+    'ICICI Bank',
+    'Axis Bank',
+    'Kotak Mahindra Bank',
+    'Indian Bank',
+  ];
+
+  static List<String> get reportPeriods => store.quarters;
+}
+
+double numOf(String value) {
+  final cleaned = value.replaceAll(RegExp(r'[^0-9.\-]'), '');
+  return double.tryParse(cleaned) ?? 0;
 }
 
 const _months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -45,6 +72,7 @@ class Invoice {
   String status; // Due | Paid | Waived
   bool pending = false;
   String? receipt;
+  DateTime? paidOn;
   Invoice(this.no, this.period, this.due, this.lines, {this.status = 'Due', this.receipt});
   double get sub => lines.fold(0.0, (a, e) => a + e.value);
   double get gst => sub * Brand.gstRate;
@@ -54,9 +82,50 @@ class Invoice {
       : status;
 }
 
+class DocFile {
+  final String type, name;
+  final int size;
+  final Uint8List? bytes;
+
+  DocFile(this.type, this.name, this.size, {this.bytes});
+
+  String get ext =>
+      name.contains('.') ? name.split('.').last.toLowerCase() : '';
+}
+
 class Milestone {
   String title, desc, date, status, evidence;
-  Milestone(this.title, this.desc, this.date, {this.status = 'Not started', this.evidence = ''});
+  String doneOn = '';
+  final List<DocFile> files = [];
+
+  Milestone(this.title, this.desc, this.date,
+      {this.status = 'Not started', this.evidence = ''});
+
+  DateTime get when {
+    final parsed = DateTime.tryParse(date);
+    if (parsed != null) return parsed;
+
+    final parts = date.trim().split(RegExp(r'\s+'));
+    if (parts.length == 3) {
+      const months = [
+        'jan', 'feb', 'mar', 'apr', 'may', 'jun',
+        'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
+      ];
+      final month = months.indexOf(parts[1].toLowerCase().substring(
+            0,
+            parts[1].length >= 3 ? 3 : parts[1].length,
+          )) + 1;
+      final day = int.tryParse(parts[0]);
+      final year = int.tryParse(parts[2]);
+      if (month > 0 && day != null && year != null) {
+        return DateTime(year, month, day);
+      }
+    }
+    return DateTime(2100);
+  }
+
+  bool get overdue =>
+      status != 'Completed' && when.isBefore(DateTime.now());
 }
 
 class Report {
@@ -89,6 +158,7 @@ final store = Store();
 
 class Store extends ChangeNotifier {
   AppUser? me;
+  Uint8List? logo;
   String get role => me?.role ?? '';
   void login(AppUser u) { me = u; log('Logged in'); }
   void logout() { me = null; notifyListeners(); }

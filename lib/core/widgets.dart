@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../config.dart';
+import 'ui.dart';
 
 // Shared building blocks used by many pages (logo, image helper, portal sidebar frame,
 // popup form, ticket thread, sidebar menus). Page-specific code lives in pages/.
@@ -187,59 +188,249 @@ class PortalScaffold extends StatelessWidget {
 
   void _notices(BuildContext context) => showDialog(
     context: context,
-    builder: (ctx) => AlertDialog(
-      title: const Text('Notifications'),
-      content: SizedBox(
-        width: 400,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (final n in store.notices.take(8))
-              ListTile(
-                dense: true,
-                leading: const Icon(Icons.notifications_none),
-                title: Text(n),
-              ),
-          ],
+    builder: (ctx) => Align(
+      alignment: Alignment.topRight,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 64, right: 16),
+        child: Material(
+          borderRadius: BorderRadius.circular(20),
+          elevation: 12,
+          child: Container(
+            width: 380,
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        'Notifications',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        store.notices.clear();
+                        store.refresh();
+                        Navigator.pop(ctx);
+                      },
+                      child: const Text('Clear all'),
+                    ),
+                  ],
+                ),
+                const Divider(),
+                if (store.notices.isEmpty)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24),
+                    child: Center(child: Text('You are all caught up 🎉')),
+                  ),
+                for (final n in store.notices.take(8))
+                  ListTile(
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                    leading: CircleAvatar(
+                      radius: 16,
+                      backgroundColor: Brand.primary.withOpacity(.1),
+                      child: const Icon(
+                        Icons.notifications_none,
+                        size: 18,
+                        color: Brand.primary,
+                      ),
+                    ),
+                    title: Text(n),
+                  ),
+              ],
+            ),
+          ),
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(ctx),
-          child: const Text('Close'),
-        ),
-      ],
     ),
   );
 
   @override
   Widget build(BuildContext context) {
-    final wide = MediaQuery.of(context).size.width >= 820;
-    Widget menu() => ListView(
-      children: [
-        for (final i in items)
-          ListTile(
-            leading: Icon(i.icon),
-            title: Text(i.label),
-            selected: i.path == current,
-            onTap: () => go(context, i.path),
+    final wide = MediaQuery.of(context).size.width >= 900;
+
+    Widget navTile(NavItem i) {
+      final on = i.path == current;
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () => go(context, i.path),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: on ? Colors.white.withOpacity(.12) : Colors.transparent,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 3,
+                  height: 20,
+                  margin: const EdgeInsets.only(right: 12),
+                  decoration: BoxDecoration(
+                    color: on ? Brand.accent : Colors.transparent,
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                ),
+                Icon(
+                  i.icon,
+                  size: 21,
+                  color: on ? Brand.accent : Colors.white70,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    i.label,
+                    style: TextStyle(
+                      color: on ? Colors.white : Colors.white70,
+                      fontWeight: on ? FontWeight.w800 : FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-      ],
+        ),
+      );
+    }
+
+    Widget side() => Container(
+      width: 258,
+      color: Brand.dark,
+      child: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(22, 24, 22, 20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: InkWell(
+                  onTap: () => go(context, '/'),
+                  child: const BrandLogo(light: true),
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(26, 6, 22, 8),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'MENU',
+                  style: TextStyle(
+                    color: Colors.white38,
+                    fontSize: 11,
+                    letterSpacing: 2,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListView(children: [for (final i in items) navTile(i)]),
+            ),
+            Container(
+              margin: const EdgeInsets.all(14),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(.07),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Row(
+                children: [
+                  Avatar(
+                    bytes: store.role == 'incubatee' ? store.logo : null,
+                    name: store.me?.name ?? '',
+                    size: 38,
+                    radius: 12,
+                    color: Brand.accent,
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          store.me?.name ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13,
+                          ),
+                        ),
+                        Text(
+                          store.me == null
+                              ? ''
+                              : (store.role == 'incubatee'
+                                    ? store.me!.startup
+                                    : store.role),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.white54,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    tooltip: 'Log out',
+                    visualDensity: VisualDensity.compact,
+                    icon: const Icon(
+                      Icons.logout,
+                      color: Colors.white70,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      store.logout();
+                      go(context, '/');
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
+
     return ListenableBuilder(
       listenable: store,
       builder: (context, _) => Scaffold(
+        backgroundColor: Brand.surface,
+        drawer: wide
+            ? null
+            : Drawer(backgroundColor: Brand.dark, child: side()),
         appBar: AppBar(
-          backgroundColor: Brand.primary,
-          foregroundColor: Colors.white,
-          title: Row(
-            children: [
-              const BrandLogo(light: true),
-              const SizedBox(width: 12),
-              if (wide) Text('| $title'),
-            ],
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          elevation: 0,
+          scrolledUnderElevation: 1,
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.w800,
+              color: Brand.dark,
+            ),
           ),
           actions: [
+            if (wide)
+              TextButton.icon(
+                onPressed: () => go(context, '/'),
+                icon: const Icon(Icons.language, size: 18),
+                label: const Text('View website'),
+              ),
             IconButton(
               tooltip: 'Notifications',
               icon: Badge(
@@ -249,30 +440,21 @@ class PortalScaffold extends StatelessWidget {
               ),
               onPressed: () => _notices(context),
             ),
-            if (wide) Center(child: Text(store.me?.name ?? '')),
-            IconButton(
-              tooltip: 'Logout',
-              icon: const Icon(Icons.logout),
-              onPressed: () {
-                store.logout();
-                go(context, '/');
-              },
-            ),
+            const SizedBox(width: 8),
           ],
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1),
+            child: Container(height: 1, color: kBorder),
+          ),
         ),
-        drawer: wide ? null : Drawer(child: menu()),
         body: Row(
           children: [
-            if (wide)
-              SizedBox(
-                width: 230,
-                child: Material(color: Colors.white, child: menu()),
-              ),
+            if (wide) side(),
             Expanded(
               child: SingleChildScrollView(
                 child: Box(
-                  max: 1000,
-                  pad: const EdgeInsets.all(20),
+                  max: 1180,
+                  pad: EdgeInsets.all(wide ? 32 : 16),
                   child: body(),
                 ),
               ),
@@ -431,9 +613,12 @@ void showTicket(BuildContext context, Ticket t) {
 
 // ───────── PORTAL SIDEBAR MENUS ─────────
 const incItems = [
-  NavItem('Profile', '/portal/profile', Icons.business),
-  NavItem('Billing', '/portal/billing', Icons.receipt_long),
+  NavItem('Dashboard', '/portal/dashboard', Icons.space_dashboard_outlined),
+  NavItem('Profile', '/portal/profile', Icons.business_outlined),
+  NavItem('Billing', '/portal/billing', Icons.receipt_long_outlined),
   NavItem('Progress', '/portal/progress', Icons.timeline),
+  NavItem('Mentors', '/portal/mentors', Icons.psychology_outlined),
+  NavItem('Bookings', '/portal/bookings', Icons.event_available_outlined),
   NavItem('Support', '/portal/support', Icons.support_agent),
 ];
 

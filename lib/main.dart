@@ -83,10 +83,12 @@ Widget resolve(String path) {
     return (portalRoutes[path] ?? portalRoutes['/portal/profile']!)();
   }
   if (path.startsWith('/admin')) {
-    if (store.role != 'admin' && store.role != 'mentor')
+    if (store.role != 'admin' && store.role != 'mentor') {
       return const AuthPage();
-    if (store.role == 'mentor' && !mentorPages.contains(path))
+    }
+    if (store.role == 'mentor' && !mentorPages.contains(path)) {
       return adminRoutes['/admin/dashboard']!();
+    }
     return (adminRoutes[path] ?? adminRoutes['/admin/dashboard']!)();
   }
   final page = publicRoutes[path];
