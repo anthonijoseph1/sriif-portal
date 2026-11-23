@@ -9,7 +9,7 @@ import '../core/site_kit.dart';
 // HOME PAGE = hero + every section below it. Text/images/numbers come from config.dart.
 
 // ═════════════════════════════════════════════════════════════
-// HOME PAGE  (hero + all sections listed in siteSections)
+// HOME PAGE  (hero + all sections listed in siteSections)cc
 // ═════════════════════════════════════════════════════════════
 class HomePage extends StatefulWidget {
   final String? scrollTo;
